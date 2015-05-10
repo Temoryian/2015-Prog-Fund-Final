@@ -1,0 +1,337 @@
+Problem Statement: Design a program that calculates the current pension benefit 
+for Protected Status State of Wisconsin Employees.  The program should display a 
+greeting message giving instructions on how to use the calculator followed by a 
+prompt asking the user to enter their name, age, 3 highest years of total income, 
+years of service, and how many years from now they would like to retire.  The 
+program will then display the 3 high years of total income, years of service, 
+and final monthly average used for the pension calculation.  The program will 
+then calculate and display the current pension if taken for ages 50-53 with 
+25 years of service and the current pension if taken for ages 50-54 with less 
+than 25 years of service.  The program will also calculate the target pension 
+retirement age and display the amount back to the user if the user is of retirement 
+age or else it will display a message telling the user they are not old enough 
+to retire.
+
+To calculate final monthly average add the 3 highest years of total income, 
+divide them by 3, and then divide them again by 12.
+To calculate pension amounts the following formula should be used: 
+((((3 High years total income / 3) *0.02) * service years) / 12 months)
+For every year the user retires before their eligible retirement age deduct .48 
+from the pension amount.
+
+
+Nouns: 
+Pension benefit, greeting message, instructions, name, age, highest years of total 
+income, years of service, final monthly average, formula.
+
+Verbs:
+Calculate, display, prompt
+
+Defining Diagram:
+
+Input:
+userName
+userAge
+highYear1
+highYear2
+highYear3
+serviceYears
+retirementTarget
+
+Processing:
+Calculate averageHighYear
+Calculate monthlyAverage
+Calculate pension
+
+Output:
+Display Greeting
+Display userName
+Display highyear1, highyear2, highyear3
+Display Pension Calculations
+Display message if not old enough to retire
+
+
+Pseudocode
+
+CalculateProtectedStatusStateOfWisconsinPensionBenefit
+  Initialize ageReduction to 0.808, 0.856, 0.904, 0.952
+  Initialize averageHighYear
+  Initialize benefitOutput
+  Initialize fullBenefitAge50
+  Initialize fullBenefitAge51
+  Initialize fullBenefitAge52
+  Initialize fullBenefitAge53
+  Initialize greetingMessage
+  Initialize highYear1
+  Initialize highYear2
+  Initialize highYear3
+  Initialize keepLooping to true
+  Initialize monthlyAverage
+  Initialize partialBenefitAge50
+  Initialize partialBenefitAge51
+  Initialize partialBenefitAge52
+  Initialize partialBenefitAge53
+  Initialize partialBenefitAge54
+  Initialize pension
+  Initialize retirementTarget
+  Initialize serviceYears
+  Initialize userAge
+  Initialize userName
+  While keepLooping = true DO
+    Prompt for greetingMessage with "Welcome to the Protected Status Retirement Calculator\n"
+      "Please have your 3 highest years income and total service years available.\n"
+      "Enter all numbers without dollar signs and commas.\n"
+      "There are only 7 entries you need to make to calculate your retirement benefit!\n" 
+      "Enter \"quit\" to EXIT or press enter or click OK to continue."
+    Convert greetingMessage to lower case  
+    IF greetingMessage === "quit" THEN
+      keepLooping = false
+        ELSE
+          prompt for userName with "Please enter your name. (Optional)"
+          prompt for userAge with "How old are you?"
+    ENDIF
+    IF userAge is not a number THEN
+      alert for userAge with userAge + " is not a number. Please try again."
+      WHILE userAge is not a number DO
+        prompt for userAge with "How old are you?"
+      ENDWHILE
+    ENDIF  
+    prompt for highYear1 with "Please enter your highest annual income."
+    IF highYear1 is not a number THEN
+      alert for highYear1 with highYear1 + " is not a number. Please try again."
+      WHILE highYear1 is not a number DO
+        prompt for highYear1 with "Please enter your highest annual income."
+      ENDWHILE
+    ENDIF
+    prompt for highYear2 with "Please enter your second highest annual income."
+    IF highYear2 is not a number THEN
+      alert for highYear2 with highyYear2 + " is not a number. Please try again."
+      WHILE highYear2 is not a number DO
+        prompt for highYear2 with "Please enter your second highest annual income."
+      ENDWHILE
+    ENDIF 
+    prompt for highYear3 with "Please enter your third highest annual income."
+    IF highYear3 is not a number THEN
+      alert for highYear3 with highyYear3 + " is not a number. Please try again."
+      WHILE highYear3 is not a number DO
+        prompt for highYear3 with "Please enter your third highest annual income." 
+      ENDWHILE
+    ENDIF
+    prompt for serviceYears with "Please enter your years of service."
+    IF serviceYears is not a number THEN
+      alert for serviceYears with serviceYears + " is not a number. Please try again."  
+      WHILE serviceYears is not a number DO
+        prompt for serviceYears with "Please enter your years of service."
+      ENDWHILE
+    ENDIF
+    prompt for retirementTarget with "How many years from now would you like to retire?"
+    IF retirementTarget is not a number THEN
+      alert for retirementTarget with retirementTarget + " is not a number. Please try again." 
+      WHILE retirementTarget is not a number DO
+        prompt for retirementTarget with "How many years from now would you like to retire?"
+      ENDWHILE
+    ENDIF
+  ENDWHILE
+  Convert serviceYears to Number
+  Calculate averageHighYear (highYear1 + highYear2 + highYear3) / 3
+  Calculate monthlyAverage (averageHighYear / 12)
+  Calculate pension (averageHighYear * 0.02) * serviceYears / 12
+  Change keepLooping to false  
+  fullBenefitAge50 = pension * ageReduction[1] (0.856)  
+  fullBenefitAge51 = pension * ageReduction[2] (0.904)
+  fullBenefitAge52 = pension * ageReduction[3] (0.952)
+  fullBenefitAge53 = pension
+  FUNCTION calculateTargetRetirementBenefit(userAge, retirementTarget) 
+    Initialize age to Number
+    Initialize benefit
+    Initialize targetAge
+    Initialize targetPension
+    Initialize totalServiceYears to Number
+    Initialize yearsLeft to Number
+    totalServiceYears = serviceYears + yearsLeft
+    targetAge = age + yearsLeft
+    targetPension = (averageHighYear * 0.02) * totalServiceYears / 12
+    IF targetAge === 50 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.808)
+    ENDIF
+    IF targetAge === 51 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.856)
+    ENDIF
+    IF targetAge === 52 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.904)
+    ENDIF
+    IF targetAge === 53 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.952)  
+    ENDIF
+    IF targetAge >= 54 THEN
+      benefit = targetPension
+    ENDIF
+    IF targetAge === 50 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.856)
+    ENDIF
+    IF targetAge === 51 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.904)
+    ENDIF
+    IF targetAge === 52 AND totalServiceYears < 25 THEN
+      benefit = targetPension * ageReduction (0.952)  
+    ENDIF      
+    IF targetAge === 53 AND totalServiceYears >= 25 THEN
+      benefit = targetPension
+    ENDIF
+    IF targetAge < 50 THEN
+      output = "You need to be at least 50 years old to retire."
+      ELSE
+        Display targetPension
+    ENDIF
+  ENDFUNCTION
+  partialBenefitAge50 = pension * ageReduction[0] (0.808)
+  partialBenefitAge51 = pension * ageReduction[1] (0.856)
+  partialBenefitAge52 = pension * ageReduction[2] (0.904)
+  partialBenefitAge53 = pension * ageReduction[3] (0.952)
+  partialBenefitAge54 = pension
+  FUNCTION displayOutput
+    Initialize output 1 to html "benefit50"
+    Initialize output 2 to html "benefit51"  
+    Initialize output 3 to html "benefit52"
+    Initialize output 4 to html "benefit53"
+    Initialize output 5 to html "partialBenefit50"
+    Initialize output 6 to html "partialBenefit51"
+    Initialize output 7 to html "partialBenefit52"
+    Initialize output 8 to html "partialBenefit53"
+    Initialize output 9 to html "partialBenefit54"
+    Initialize output 10 to html "enteredName"
+    Initialize output 11 to html "year1"
+    Initialize output 12 to html "year2"
+    Initialize output 13 to html "year3"
+    Initialize output 14 to html "currentService"
+    Initialize output 15 to html "calculatedMonthlyAverage"
+    Display fullBenefitAge50 to output1
+    Display fullBenefitAge51 to output2
+    Display fullBenefitAge52 to output3
+    Display fullBenefitAge53 to output4
+    Display partialBenefit50 to output5
+    Display partialBenefit51 to output6
+    Display partialBenefit52 to output7
+    Display partialBenefit53 to output8
+    Display partialBenefit54 to output9
+    Display userName to output10
+    Display highYear1 to output11
+    Display highYear2 to output12
+    Display highyear3 to output13
+    Display serviceYears to output14
+    Display monthlyAverage to output15
+  ENDFUNCTION
+END
+
+
+Test Plans
+
+VARIABLES: userName, highYear1, highYear2, highYear3, serviceYears, monthlyAverage
+fullBenefitAge50, fullBenefitAge51, fullBenefitAge52, fullBenefitAge53, partialBenefit50,
+partialBenefit51, partialBenefit52, partialBenefit53, partialBenefit54, benefitOutput
+
+TEST CASE 1: 
+
+  INPUT VALUES: Juan, 20, 40000, 30000, 50000, 1, 32
+
+  EXPECTED RESULT: Juan, 40000, 30000, 50000, 1, 3333.33, 57.07, 60.27, 63.47, 
+  66.67, 53.87, 57.07, 60.27, 63.47, 66.67, 2094.40
+
+  ACTUAL RESULT: Juan, 40000, 30000, 50000, 1, 3333.33, 57.07, 60.27, 63.47, 
+  66.67, 53.87, 57.07, 60.27, 63.47, 66.67, 2094.40 
+
+
+VARIABLES: 
+
+TEST CASE 2: 
+
+  INPUT VALUES: quit
+
+  EXPECTED RESULT:  Program quits
+                    
+  ACTUAL RESULT: Program quits
+
+
+VARIABLES: 
+
+TEST CASE 3:
+
+  INPUT VALUES: Frank, 30, 42000, 32000, 55000, 10, 23
+
+  EXPECTED RESULT:  Frank, 42000, 32000, 55000, 10, 3583.33, 613.47, 647.87, 
+  682.27, 716.67, 579.07, 613.47, 647.87, 682.27, 716.67, 2365.00
+                    
+  ACTUAL RESULT:  Frank, 42000, 32000, 55000, 10, 3583.33, 613.47, 647.87, 
+  682.27, 716.67, 579.07, 613.47, 647.87, 682.27, 716.67, 2365.00
+                  
+
+VARIABLES: 
+
+TEST CASE 4:
+
+  INPUT VALUES: Steve, 20, 50000, 40000, 30000, 2, 20
+
+  EXPECTED RESULT: Steve, 50000, 40000, 30000, 2, 3333.33, 114.13, 120.53, 126.93,
+  133.33, 107.73, 114.13, 120.53, 126.93, 133.33, You need to be at least 50 years 
+  old to retire.
+                    
+  ACTUAL RESULT:  Steve, 50000, 40000, 30000, 2, 3333.33, 114.13, 120.53, 126.93,
+  133.33, 107.73, 114.13, 120.53, 126.93, 133.33, You need to be at least 50 years 
+  old to retire.
+                  
+
+VARIABLES: 
+
+TEST CASE 5:
+
+  INPUT VALUES: Ben, 40, 100000, 90000, 80000, 20, 15
+
+  EXPECTED RESULT:  Ben, 100000, 90000, 80000, 20, 7500.00, 2568.00, 2712.00,
+  2856.00, 3000.00, 2424, 2568.00, 2712.00, 2856.00, 3000.00, 5250.00
+                    
+  ACTUAL RESULT:  Ben, 100000, 90000, 80000, 20, 7500.00, 2568.00, 2712.00,
+  2856.00, 3000.00, 2424, 2568.00, 2712.00, 2856.00, 3000.00, 5250.00
+                  
+
+VARIABLES: 
+
+TEST CASE 6: Woot Woot, ten
+
+  INPUT VALUES: Woot Woot, ten
+
+  EXPECTED RESULT:  Woot Woot, ten is not a number.  Please try again.
+                    
+  ACTUAL RESULT:  Woot Woot, ten is not a number.  Please try again.
+                  
+
+VARIABLES: 
+
+TEST CASE 7: 
+
+  INPUT VALUES: Steve Jobs, 20, 30000, 20000, 10000, 40, 5
+
+  EXPECTED RESULT:  Steve Jobs, 30000, 20000, 10000, 40, 1666.67, 1141.33, 1205.33,
+  1269.33, 1333.33, 1077.33, 1141.33, 1205.33, 1269.33, 1333.33, You need to be 
+  at lest 50 years old to retire.
+                    
+  ACTUAL RESULT:  Steve Jobs, 30000, 20000, 10000, 40, 1666.67, 1141.33, 1205.33,
+  1269.33, 1333.33, 1077.33, 1141.33, 1205.33, 1269.33, 1333.33, You need to be 
+  at lest 50 years old to retire.
+                  
+TEST CASE 8:
+
+  INPUT VALUES: Test all fields to make sure all entries other than name only allow numbers.
+  
+  EXPECTED RESULT: (entered text) is not a number if NaN or allow entry if number.
+
+  ACTUAL RESULT:  Non-Numbers came back as (entered text) is not a number or were accepted
+  if they were numbers.
+  
+TEST CASE 9:
+
+  INPUT VALUES: Entered all of my personal information that is issued to me annually
+  by the state of Wisconsin.  The state only issues two numbers - partialBenefit50, partialBenefit54.
+  
+  EXPECTED RESULT: partialBenefit50, partialBenefit54 to match retirement benefits sheet.
+  
+  ACTUAL RESULT: Both numbers matched.  

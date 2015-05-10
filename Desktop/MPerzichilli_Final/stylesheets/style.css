@@ -1,0 +1,31 @@
+body {
+  background-image: url(../images/vanilla.jpg);
+  text-align: center;
+}
+
+body > h1 {
+  color: #4169E1;
+  font-size: 48px;
+}
+
+ol {
+  list-style: none;
+  padding: 10px;
+}
+
+form {
+  padding: 10px;
+  width: 50%;
+}
+
+form > ol > li > output {
+  color:green;
+  font-weight: bold;
+}
+
+#calculatorForm {
+  border-style: solid;
+  font-size: 28px;
+  margin-left: 25%;
+}
+
